@@ -4,8 +4,200 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Acquire | Smart Lead Generation</title>
-  <link rel="stylesheet" href="assets/css/style.css">
-  <link rel="stylesheet" href="assets/css/flow.css">
+  <style>
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  --bg-color: #000000;       /* UseCognify Pure Black */
+  --surface-color: #060606;  /* Extremely subtle elevation */
+  --primary-color: #0f62fe;  /* Kept for accents and Globe */
+  --primary-glow: rgba(15, 98, 254, 0.1);
+  --text-main: #ffffff;
+  --text-muted: #888888;
+  --border-color: rgba(255, 255, 255, 0.08); /* Crisp thin lines */
+  
+  --font-heading: 'Inter', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --font-serif: 'Instrument Serif', serif;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  line-height: 1.5;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: 500; 
+  letter-spacing: -0.02em;
+  margin-bottom: 0.5em;
+}
+
+.serif-accent {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 1.05em;
+  letter-spacing: 0.02em;
+  color: var(--text-main);
+}
+
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.text-muted { color: var(--text-muted); font-size: 0.95rem; }
+.mt-4 { margin-top: 16px; }
+.mb-2 { margin-bottom: 8px; }
+.full-width { width: 100%; display: block; text-align: center; }
+.blob { display: none !important; }
+
+.glass-panel {
+  background: var(--surface-color);
+  border: 1px solid var(--border-color);
+  border-radius: 12px; 
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 24px;
+  border-radius: 100px; 
+  font-weight: 500;
+  font-family: var(--font-heading);
+  letter-spacing: -0.01em;
+  text-decoration: none;
+  transition: all 0.2s;
+  cursor: pointer;
+  border: none;
+  font-size: 0.95rem;
+}
+
+.btn.small { padding: 8px 16px; font-size: 0.85rem; }
+
+.btn-primary { background: var(--text-main); color: #000; }
+.btn-primary:hover { background: #e0e0e0; transform: translateY(-1px); }
+
+.btn-outline { background: transparent; color: var(--text-main); border: 1px solid var(--border-color); }
+.btn-outline:hover { background: rgba(255, 255, 255, 0.05); }
+
+.form-group { margin-bottom: 16px; }
+.form-group label {
+  display: block;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+  font-weight: 500;
+  text-align: left;
+}
+.form-group input, .form-group select, .form-group textarea {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-color);
+  color: var(--text-main);
+  padding: 12px;
+  border-radius: 8px;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.badge {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 100px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-color);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.pill-nav {
+  position: sticky;
+  top: 0; 
+  z-index: 1000;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border-color);
+  max-width: 100%;
+  margin: 0; 
+  padding: 16px 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.pill-nav .nav-links { display: flex; align-items: center; gap: 28px; }
+.pill-nav .logo {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: -0.04em;
+  margin-right: 20px;
+}
+.pill-nav .logo span { color: var(--text-muted); font-weight: 400;}
+.pill-nav .nav-links a { color: var(--text-muted); text-decoration: none; font-weight: 500; font-size: 0.85rem; transition: color 0.2s; }
+.pill-nav .nav-links a:hover { color: var(--text-main); }
+
+html { scroll-behavior: smooth; scroll-padding-top: 120px; }
+.huge-title { font-size: 4.2rem; line-height: 1.05; margin-bottom: 16px; font-weight: 500; letter-spacing: -0.04em; }
+.section-title { font-size: 2.4rem; margin-bottom: 12px; text-align: center; font-weight: 500; letter-spacing: -0.03em;}
+.max-w-800 { max-width: 800px; margin: 0 auto; }
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; } 
+
+.pt-0 { padding-top: 0 !important; }
+.pb-0 { padding-bottom: 0 !important; }
+.section-padding { padding-top: 80px; padding-bottom: 80px; }
+.section-desc { font-size: 1.1rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 16px; text-align: center; }
+.mx-auto { margin-left: auto; margin-right: auto; }
+.italic { font-style: italic; font-family: var(--font-serif); font-size: 1.2rem;}
+.small { font-size: 0.85rem; }
+
+@keyframes outcrowdReveal {
+  0% { opacity: 0; transform: translateY(16px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+.reveal { opacity: 0; animation: outcrowdReveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+.scroll-reveal { opacity: 0; transform: translateY(16px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+.scroll-reveal.active { opacity: 1; transform: translateY(0); }
+
+.t-delay-100 { transition-delay: 0.1s; animation-delay: 0.1s; }
+.t-delay-200 { transition-delay: 0.2s; animation-delay: 0.2s; }
+.t-delay-300 { transition-delay: 0.3s; animation-delay: 0.3s; }
+
+.hero-split {
+  display: grid;
+  grid-template-columns: 1fr 400px;
+  gap: 48px;
+  align-items: center;
+  min-height: auto;
+  padding-bottom: 40px;
+}
+.hero-subtext { font-size: 1.15rem; color: var(--text-muted); line-height: 1.6;}
+.signin-box { padding: 32px; }
+
+@media (max-width: 900px) {
+  .huge-title { font-size: 3rem; }
+  .grid-3 { grid-template-columns: 1fr; }
+  .hero-split { grid-template-columns: 1fr; text-align: center; }
+  .signin-box { text-align: left; }
+  #globe-container { height: 350px !important; }
+  .pill-nav { flex-direction: column; gap: 12px; padding: 16px; position: relative; }
+}
+  </style>
 </head>
 <body>
   
@@ -54,7 +246,6 @@
        <p class="section-desc">Scrape target niches, analyze profiles, and send mass-personalized proposals to businesses worldwide—watching qualified leads land directly in your pipeline.</p>
     </div>
 
-    <!-- The exact pristine black/blue globe as requested -->
     <div id="globe-container" class="scroll-reveal t-delay-200" style="width: 100%; cursor: grab; display: flex; justify-content: center; margin-top: 10px;"></div>
   </section>
 
