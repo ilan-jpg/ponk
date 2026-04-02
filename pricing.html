@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Select Plan | Acquire</title>
+  <style>
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  --bg-color: #000000;
+  --surface-color: #060606;
+  --primary-color: #0f62fe;
+  --text-main: #ffffff;
+  --text-muted: #888888;
+  --border-color: rgba(255, 255, 255, 0.08);
+  
+  --font-heading: 'Inter', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --font-serif: 'Instrument Serif', serif;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body { font-family: var(--font-body); background-color: var(--bg-color); color: var(--text-main); line-height: 1.5; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+
+h1, h2, h3, h4, h5, h6 { font-family: var(--font-heading); font-weight: 500; letter-spacing: -0.02em; margin-bottom: 0.5em; }
+
+.serif-accent { font-family: var(--font-serif); font-style: italic; font-weight: 400; font-size: 1.05em; letter-spacing: 0.02em; color: var(--text-main); }
+
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.text-muted { color: var(--text-muted); font-size: 0.95rem; }
+.mt-4 { margin-top: 16px; }
+.mb-2 { margin-bottom: 8px; }
+.mb-4 { margin-bottom: 16px; }
+.full-width { width: 100%; display: block; text-align: center; }
+
+.glass-panel { background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 12px; }
+
+.btn { display: inline-flex; align-items: center; justify-content: center; padding: 12px 24px; border-radius: 100px; font-weight: 500; font-family: var(--font-heading); letter-spacing: -0.01em; text-decoration: none; transition: all 0.2s; cursor: pointer; border: none; font-size: 0.95rem; }
+.btn-primary { background: var(--text-main); color: #000; }
+.btn-primary:hover { background: #e0e0e0; transform: translateY(-1px); }
+.btn-outline { background: transparent; color: var(--text-main); border: 1px solid var(--border-color); }
+.btn-outline:hover { background: rgba(255, 255, 255, 0.05); }
+
+/* FLOW CSS INJECTION */
+.centered-layout { display: flex; align-items: center; justify-content: center; min-height: 100vh; }
+.huge-title { font-size: 4.2rem; line-height: 1.05; margin-bottom: 16px; font-weight: 500; letter-spacing: -0.04em; }
+.section-title { font-size: 2.4rem; margin-bottom: 12px; text-align: center; font-weight: 500; letter-spacing: -0.03em;}
+.max-w-800 { max-width: 800px; margin: 0 auto; }
+.text-center { text-align: center; }
+
+@keyframes outcrowdReveal { 0% { opacity: 0; transform: translateY(16px); } 100% { opacity: 1; transform: translateY(0); } }
+.reveal { opacity: 0; animation: outcrowdReveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+.delay-100 { animation-delay: 0.1s; }
+.delay-200 { animation-delay: 0.2s; }
+.delay-300 { animation-delay: 0.3s; }
+
+.pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 32px; }
+.pricing-card { padding: 32px 24px; text-align: left; border-radius: 12px; display: flex; flex-direction: column; background: var(--surface-color); border: 1px solid var(--border-color); }
+.pricing-card.highlight { border-color: rgba(255,255,255,0.4); } 
+.badge-top { display: none; }
+.pricing-card h3 { font-size: 1.35rem; margin-bottom: 4px; font-weight: 500;}
+.pricing-card .price { font-size: 2.4rem; font-weight: 500; margin-bottom: 24px; letter-spacing: -0.04em;}
+.pricing-card .features { list-style: none; margin-bottom: 24px; flex-grow: 1; }
+.pricing-card .features li { margin-bottom: 12px; color: var(--text-muted); font-size: 0.95rem; display: flex; align-items:flex-start;}
+.pricing-card .features li::before { content: '✓'; color: var(--text-main); margin-right: 12px; opacity: 0.5;}
+
+@media (max-width: 900px) {
+  .huge-title { font-size: 3rem; }
+  .pricing-grid { grid-template-columns: 1fr; }
+}
+  </style>
+</head>
+<body class="centered-layout">
+
+  <div class="container text-center max-w-800 reveal">
+     <h1 class="huge-title">Select your <span class="serif-accent">Scale.</span></h1>
+     <p class="text-muted mb-4" style="font-size: 1.2rem;">You're one step away from automated B2B acquisition.</p>
+     
+     <div class="pricing-grid reveal delay-200">
+        <!-- Free Plan -->
+        <div class="pricing-card glass-panel">
+           <h3>Starter</h3>
+           <div class="price">Free</div>
+           <ul class="features">
+             <li>5 Scraping Tokens</li>
+             <li>Basic Outreach (Insta/WA)</li>
+             <li>Standard AI templates</li>
+           </ul>
+           <a href="query.html" class="btn btn-outline full-width mt-4">Select Starter</a>
+        </div>
+
+        <!-- $5 Plan -->
+        <div class="pricing-card glass-panel highlight">
+           <div class="badge-top">Most Popular</div>
+           <h3>Pro</h3>
+           <div class="price">$5<span>/mo</span></div>
+           <ul class="features">
+             <li>Unlimited Context Scraping</li>
+             <li>Bulk send via WhatsApp</li>
+             <li>Custom AI Proposals</li>
+           </ul>
+           <a href="query.html" class="btn btn-primary full-width mt-4">Select Pro</a>
+        </div>
+
+        <!-- $10 Plan -->
+        <div class="pricing-card glass-panel">
+           <h3>Agency</h3>
+           <div class="price">$10<span>/mo</span></div>
+           <ul class="features">
+             <li>White Labeling Option</li>
+             <li>Priority Auto-Sending</li>
+             <li>Dedicated Proxy Server</li>
+           </ul>
+           <a href="query.html" class="btn btn-outline full-width mt-4">Select Agency</a>
+        </div>
+     </div>
+  </div>
+
+</body>
+</html>

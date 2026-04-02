@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Engine Dashboard | Acquire</title>
+  <style>
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  --bg-color: #000000;
+  --surface-color: #060606;
+  --primary-color: #0f62fe;
+  --secondary-color: #3b82f6;
+  --text-main: #ffffff;
+  --text-muted: #888888;
+  --border-color: rgba(255, 255, 255, 0.08);
+  
+  --font-heading: 'Inter', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --font-serif: 'Instrument Serif', serif;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: var(--font-body); background-color: var(--bg-color); color: var(--text-main); line-height: 1.5; overflow: hidden; -webkit-font-smoothing: antialiased; }
+h1, h2, h3, h4, h5, h6 { font-family: var(--font-heading); font-weight: 500; letter-spacing: -0.02em; margin-bottom: 0.5em; }
+
+.serif-accent { font-family: var(--font-serif); font-style: italic; font-weight: 400; font-size: 1.05em; letter-spacing: 0.02em; color: var(--text-main); }
+.text-muted { color: var(--text-muted); font-size: 0.95rem; }
+.mt-4 { margin-top: 16px; }
+.mb-2 { margin-bottom: 8px; }
+.mb-4 { margin-bottom: 16px; }
+.full-width { width: 100%; display: block; text-align: center; }
+
+.glass-panel { background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 12px; }
+
+.btn { display: inline-flex; align-items: center; justify-content: center; padding: 12px 24px; border-radius: 100px; font-weight: 500; font-family: var(--font-heading); letter-spacing: -0.01em; text-decoration: none; transition: all 0.2s; cursor: pointer; border: none; font-size: 0.95rem; }
+.btn-primary { background: var(--text-main); color: #000; }
+.btn-primary:hover { background: #e0e0e0; transform: translateY(-1px); }
+.btn-outline { background: transparent; color: var(--text-main); border: 1px solid var(--border-color); }
+.btn-outline:hover { background: rgba(255, 255, 255, 0.05); }
+
+/* DASHBOARD SPECIFIC INJECTION */
+.app-layout { display: flex; height: 100vh; width: 100vw; }
+
+.sidebar { width: 280px; height: calc(100vh - 32px); margin: 16px 0 16px 16px; padding: 24px; display: flex; flex-direction: column; justify-content: space-between; border-radius: 24px; flex-shrink: 0; }
+.sidebar .logo a { font-size: 1.5rem; margin-bottom: 48px; display: block; font-weight: 600; letter-spacing: -0.04em; }
+
+.nav-menu { list-style: none; }
+.nav-menu li { padding: 16px; border-radius: 12px; margin-bottom: 8px; color: var(--text-muted); cursor: pointer; transition: all 0.2s; display: flex; align-items: center; font-weight: 500; }
+.nav-menu li .icon { margin-right: 12px; font-size: 1.2rem; opacity: 0.7; }
+.nav-menu li:hover { background: rgba(255, 255, 255, 0.05); color: var(--text-main); }
+.nav-menu li.active { background: rgba(255,255,255,0.05); color: var(--text-main); border-radius: 12px; }
+.nav-menu li.active .icon { opacity: 1; }
+
+.status-widget { display: flex; align-items: center; font-size: 0.9rem; color: var(--text-muted); margin-bottom: 24px; padding: 0 8px; }
+.dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; margin-right: 8px; }
+.dot.green { background: #24a148; }
+
+.user-profile { display: flex; align-items: center; padding: 16px; border-radius: 16px; gap: 12px; border: 1px solid rgba(255,255,255,0.03); }
+.avatar { width: 40px; height: 40px; background: rgba(255,255,255,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 500; }
+.user-info { display: flex; flex-direction: column; }
+.user-info .name { font-weight: 500; font-size: 0.95rem; }
+.user-info .role { font-size: 0.8rem; color: var(--text-muted); }
+
+.main-content { flex-grow: 1; padding: 32px 48px; overflow-y: auto; height: 100vh; }
+.top-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px; }
+.split-view { display: grid; grid-template-columns: 350px 1fr; gap: 32px; }
+.engine-interface, .feed-interface { padding: 32px; }
+
+.feed-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; border-bottom: 1px solid var(--border-color); padding-bottom: 16px; }
+.activity-feed { list-style: none; max-height: 400px; overflow-y: auto; padding-right: 8px; }
+.activity-feed::-webkit-scrollbar { width: 4px; }
+.activity-feed::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 4px; }
+
+.badge { display: inline-block; padding: 6px 12px; border-radius: 100px; background: rgba(255, 255, 255, 0.05); border: 1px solid var(--border-color); font-size: 0.75rem; font-weight: 500; letter-spacing: 0.02em; text-transform: uppercase; }
+
+.feed-item { padding: 16px; background: rgba(255,255,255,0.03); border-radius: 12px; margin-bottom: 12px; animation: slideIn 0.3s ease-out forwards; }
+.feed-item .time { font-size: 0.75rem; color: var(--text-muted); margin-bottom: 4px; display: block; }
+.feed-item .desc { font-size: 0.95rem; }
+.empty-state { text-align: center; color: var(--text-muted); background: transparent; border: 1px dashed var(--border-color); padding: 40px 16px; margin-top:24px;}
+
+@keyframes slideIn { from { opacity: 0; transform: translateX(20px); } to { opacity: 1; transform: translateX(0); } }
+
+@keyframes outcrowdReveal { 0% { opacity: 0; transform: translateY(16px); } 100% { opacity: 1; transform: translateY(0); } }
+.reveal { opacity: 0; animation: outcrowdReveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+.delay-100 { animation-delay: 0.1s; }
+
+@media (max-width: 900px) {
+  body { overflow: auto; } 
+  .app-layout { flex-direction: column; height: auto; padding: 16px; }
+  .sidebar { width: 100%; height: auto; margin: 0 0 24px 0; padding: 24px; }
+  .sidebar .logo a { margin-bottom: 24px; }
+  .main-content { padding: 0; height: auto; overflow-y: visible; }
+  .split-view { grid-template-columns: 1fr; gap: 24px; }
+}
+  </style>
+</head>
+<body class="reveal">
+  <div class="app-layout">
+    
+    <aside class="sidebar glass-panel">
+      <div class="sidebar-top">
+        <div class="logo"><a href="index.html" style="text-decoration: none; color: inherit;">Acquire<span style="color:var(--text-muted)">.ai</span></a></div>
+        <ul class="nav-menu">
+          <li class="active"><span class="icon">⊞</span> Overview</li>
+          <li><span class="icon">⌕</span> Protocol Engine</li>
+          <li><span class="icon">✉</span> Outreach Stats</li>
+          <li><span class="icon">👥</span> Leads Database</li>
+        </ul>
+      </div>
+      
+      <div class="sidebar-bottom">
+        <div class="status-widget">
+          <div class="dot green"></div>
+          <span>System Operational</span>
+        </div>
+        <div class="user-profile glass-panel">
+          <div class="avatar">U</div>
+          <div class="user-info">
+            <span class="name">Workspace User</span>
+            <span class="role">Active Plan</span>
+          </div>
+        </div>
+      </div>
+    </aside>
+    
+    <main class="main-content">
+      <header class="top-bar">
+        <div>
+          <h2>Target <span class="serif-accent">Engine</span></h2>
+          <p class="text-muted">Apify Integration Active.</p>
+        </div>
+      </header>
+
+      <div class="split-view">
+        
+        <section class="engine-interface glass-panel">
+          <h3>Extraction Protocol</h3>
+          <p class="text-muted mb-4">Your niche targets are loaded. Click below to command the engine to locate 100 high-potential leads natively.</p>
+          
+          <button type="button" class="btn btn-outline full-width" id="apify-btn">
+            <span class="icon" style="margin-right: 8px;">⌕</span> Start Scraping
+          </button>
+          
+          <div id="proposal-section" style="display: none; margin-top: 32px;" class="reveal delay-100">
+            <h3 class="serif-accent" style="margin-bottom:12px; font-size:1.5rem;">🎉 Targets Acquired.</h3>
+            <p class="text-muted mb-4">Configure your outreach payload.</p>
+            
+            <div style="margin-bottom: 16px;">
+              <textarea rows="4" id="custom-msg" placeholder="Write your proposal message here..." style="width: 100%; background: rgba(255,255,255,0.03); border: 1px solid var(--border-color); color: var(--text-main); padding: 12px; border-radius: 8px; font-family: var(--font-body); resize: none; outline:none; transition: border-color 0.2s;"></textarea>
+            </div>
+            
+            <button type="button" class="btn btn-outline full-width mb-2" id="ai-gen-btn">✨ Leverage AI Writer</button>
+            <button type="button" class="btn btn-primary full-width" id="send-outreach-btn">Complete Acquisition</button>
+          </div>
+        </section>
+
+        <section class="feed-interface glass-panel">
+          <div class="feed-header">
+            <h3>Engine Live Feed</h3>
+            <span class="badge" id="engine-status">Idle</span>
+          </div>
+          <ul class="activity-feed" id="live-feed">
+             <li class="feed-item empty-state">Waiting on explicit parameters.</li>
+          </ul>
+        </section>
+        
+      </div>
+    </main>
+  </div>
+  
+  <script src="assets/js/app.js"></script>
+</body>
+</html>

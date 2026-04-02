@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Target Setup | Acquire</title>
+  <style>
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  --bg-color: #000000;
+  --surface-color: #060606;
+  --primary-color: #0f62fe;
+  --text-main: #ffffff;
+  --text-muted: #888888;
+  --border-color: rgba(255, 255, 255, 0.08);
+  
+  --font-heading: 'Inter', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --font-serif: 'Instrument Serif', serif;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body { font-family: var(--font-body); background-color: var(--bg-color); color: var(--text-main); line-height: 1.5; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+
+h1, h2, h3, h4, h5, h6 { font-family: var(--font-heading); font-weight: 500; letter-spacing: -0.02em; margin-bottom: 0.5em; }
+
+.serif-accent { font-family: var(--font-serif); font-style: italic; font-weight: 400; font-size: 1.05em; letter-spacing: 0.02em; color: var(--text-main); }
+
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.text-muted { color: var(--text-muted); font-size: 0.95rem; }
+.mt-4 { margin-top: 16px; }
+.mb-2 { margin-bottom: 8px; }
+.mb-4 { margin-bottom: 16px; }
+.full-width { width: 100%; display: block; text-align: center; }
+
+.glass-panel { background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 12px; }
+
+.btn { display: inline-flex; align-items: center; justify-content: center; padding: 12px 24px; border-radius: 100px; font-weight: 500; font-family: var(--font-heading); letter-spacing: -0.01em; text-decoration: none; transition: all 0.2s; cursor: pointer; border: none; font-size: 0.95rem; }
+.btn-primary { background: var(--text-main); color: #000; }
+.btn-primary:hover { background: #e0e0e0; transform: translateY(-1px); }
+
+/* Forms */
+.form-group { margin-bottom: 16px; }
+.form-group label { display: block; font-size: 0.9rem; color: var(--text-muted); margin-bottom: 6px; font-weight: 500; text-align: left; }
+.form-group input, .form-group select {
+  width: 100%; background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border-color); color: var(--text-main); padding: 12px; border-radius: 8px; font-family: var(--font-body); font-size: 0.95rem; outline: none; transition: border-color 0.2s;
+}
+.form-group input:focus, .form-group select:focus { border-color: rgba(255, 255, 255, 0.3); }
+
+/* FLOW CSS INJECTION */
+.centered-layout { display: flex; align-items: center; justify-content: center; min-height: 100vh; }
+.text-center { text-align: center; }
+.auth-container { width: 100%; padding: 24px; }
+.wide-panel { padding: 32px; border-top: 1px solid var(--border-color); width: 100%; max-width: 500px; margin: 0 auto; box-shadow: 0 40px 80px rgba(0,0,0,0.5);}
+
+@keyframes outcrowdReveal { 0% { opacity: 0; transform: translateY(16px); } 100% { opacity: 1; transform: translateY(0); } }
+.reveal { opacity: 0; animation: outcrowdReveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+.delay-100 { animation-delay: 0.1s; }
+.delay-200 { animation-delay: 0.2s; }
+.delay-300 { animation-delay: 0.3s; }
+  </style>
+</head>
+<body class="centered-layout">
+  
+  <div class="container auth-container reveal">
+    <div class="glass-panel wide-panel">
+      <h2 class="mb-4 text-center">Define Target <span class="serif-accent">Parameters.</span></h2>
+      <p class="text-center text-muted mb-4">Input your niche and region so the engine can locate exact targets.</p>
+      
+      <form action="dashboard.html" method="get" class="flow-form">
+        
+        <div class="form-group reveal delay-100">
+          <label>Describe your niche</label>
+          <input type="text" placeholder="e.g. Scalers, Gym Owners, B2B SaaS..." required>
+        </div>
+        
+        <div class="form-group reveal delay-200">
+          <label>Target Location / Client base</label>
+          <select required>
+            <option value="">Select a Geography / Network</option>
+            <option>Instagram Global</option>
+            <option>North America</option>
+            <option>Europe</option>
+            <option>Middle East (UAE/Dubai)</option>
+          </select>
+        </div>
+        
+        <div class="reveal delay-300 mt-4">
+          <button type="submit" class="btn btn-primary full-width">Launch Engine →</button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+
+</body>
+</html>
